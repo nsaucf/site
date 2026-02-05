@@ -28,7 +28,8 @@ export default function LoginPage() {
                 return;
             }
 
-            router.push("/admin");
+            // Force full navigation to ensure cookie is honored behind proxies/CDN
+            window.location.assign("/admin");
         } catch (err) {
             console.error("Login error", err);
             setError("Login failed");

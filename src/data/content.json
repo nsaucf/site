@@ -1,0 +1,140 @@
+{
+  "execBoard": [
+    {
+      "id": "mae-torra",
+      "name": "Mae Torra",
+      "role": "President",
+      "category": "board",
+      "bio": "Leading the alliance with a passion for neuroscience and community building. Test",
+      "photo": "",
+      "email": "president@nsaucf.org",
+      "linkedin": ""
+    },
+    {
+      "id": "patricia-orelien",
+      "name": "Patricia Orelien",
+      "role": "Vice President",
+      "category": "board",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "emily-mccoy",
+      "name": "Emily McCoy",
+      "role": "Treasurer",
+      "category": "board",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "hannah-butler",
+      "name": "Hannah Butler",
+      "role": "Secretary",
+      "category": "board",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "andrei-nesterenko",
+      "name": "Andrei Nesterenko",
+      "role": "Brain Bee Coordinator",
+      "category": "board",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "nish-tikalal",
+      "name": "Nish Tikalal",
+      "role": "Research Manager",
+      "category": "officer",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "nadire-gencoglu",
+      "name": "Nadire Gencoglu",
+      "role": "Event Manager",
+      "category": "officer",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "fatima-alziyad",
+      "name": "Fatima Alziyad",
+      "role": "Education Manager",
+      "category": "officer",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "natalia-diaz",
+      "name": "Natalia Diaz",
+      "role": "Volunteering Manager",
+      "category": "officer",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "alicia-urpeque",
+      "name": "Alicia Urpeque",
+      "role": "Public Relations Manager",
+      "category": "officer",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1769049564517",
+      "name": "New Member",
+      "role": "Member",
+      "category": "officer",
+      "bio": "",
+      "photo": "",
+      "email": "",
+      "linkedin": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "title": "General Body Meeting",
+      "date": "2025-10-14T18:00:00",
+      "location": "Student Union",
+      "description": "Join us for our monthly general body meeting where we discuss upcoming opportunities and research.",
+      "type": "meeting"
+    },
+    {
+      "id": "e2",
+      "title": "Brain Bee Workshop",
+      "date": "2025-10-20T16:00:00",
+      "location": "PSY 108",
+      "description": "Preparation workshop for the upcoming Brain Bee competition.",
+      "type": "workshop"
+    }
+  ],
+  "slideshow": [
+    "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=1600"
+  ],
+  "branding": {
+    "logo": "/uploads/1770271435574-nsa_logo_upscaled.png"
+  }
+}

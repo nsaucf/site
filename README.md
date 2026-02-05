@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Neuroscience Alliance @ UCF
 
-## Getting Started
+Modern Next.js 16 (App Router) site with admin tools for managing leadership, events, and branding. Tailwind 4, TypeScript, and Framer Motion are used throughout. Admin functionality supports authenticated edits to runtime content and media uploads.
 
-First, run the development server:
+## Tech Stack
+- Next.js 16 (App Router), React 19, TypeScript
+- Tailwind 4, Framer Motion, Lucide icons
+- ESLint (Next core-web-vitals + TS)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Structure
+- `src/app` — Routes (pages/api, admin tools). Admin sections for leadership, events, branding. Middleware enforces auth.
+- `src/components` — UI primitives, layout (Navbar/Footer), home sections, leadership grid, etc.
+- `src/data` — Runtime content (`content.json`, ignored in Git) and examples (`content.example.json`, `server-config.example.json`).
+- `public/uploads` — User-uploaded assets (ignored in Git).
+- `src/lib` — Helpers (API client, content loader).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Admin & Content
+- Admin auth: cookie `admin_auth=1`, set via `/api/admin/login`; password comes from `ADMIN_PASSWORD` env.
+- Admin sections:
+  - Leadership: create/edit members with photo uploads.
+  - Events: manage upcoming events.
+  - Branding: upload/clear site logo (also used for favicon), preview header.
+- Content persistence:
+  - Runtime data lives in `src/data/content.json` (ignored in Git). If missing, defaults are used and created on first save.
+  - Example schemas: `src/data/content.example.json`, `src/data/server-config.example.json`.
+  - Uploads go to `public/uploads/` (ignored in Git). Replacing a photo deletes the previous local upload.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API/Routes
+- `/api/admin/login` — Sets auth cookie when `ADMIN_PASSWORD` matches.
+- `/api/content` — GET/POST runtime content (merges with defaults if file missing).
+- `/api/upload` — Auth-required file upload to `public/uploads`.
+- `/api/delete-file` — Auth-required delete for uploaded files.
+- `/api/instagram` — Uses `src/data/server-config.json` (ignored) to fetch IG media (unused when embedding).
+- `/api/settings` — Admin-only settings persistence for `server-config.json`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Frontend Notes
+- Navbar logo sourced from runtime content `branding.logo`; header favicon also uses this via metadata/head.
+- Slideshow on home uses Instagram embed (no token required).
+- Smooth page transitions via `app/template.tsx`.
 
-## Learn More
+## Scripts
+- `npm run dev` — Dev server
+- `npm run lint` — ESLint
+- `npm run build` — Production build
+- `npm run start` — Serve built app
 
-To learn more about Next.js, take a look at the following resources:
+## Env & Config
+- `.env.local`: `ADMIN_PASSWORD=<strong password>`
+- `src/data/server-config.json`: Instagram tokens if needed (ignored). Copy from example.
+- `src/data/content.json`: Runtime content, created/updated by admin UI (ignored). Copy from example if you want starter data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Git Ignore / Runtime Data
+- Ignored: `src/data/content.json`, `src/data/server-config.json`, `public/uploads/`, env files.
+- Tracked examples: `src/data/content.example.json`, `src/data/server-config.example.json`.

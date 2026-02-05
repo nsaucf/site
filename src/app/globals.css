@@ -1,42 +1,82 @@
+@import "tailwindcss";
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #58b0fc;
+  --foreground: #f2f6fa;
+
+  --primary: #0e2a47;
+  --accent: #fcadd0;
+  --card: #102844;
+  --muted: #f2f6fa;
+  --link: #74b3ff;
+  --radius: 18px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-link: var(--link);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+body {
+  background: linear-gradient(180deg, var(--background), #0a1423 60%);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+button, a, .btn {
+  border-radius: 999px;
+}
+
+/* Custom container override for consistent centering and padding */
+.container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 2rem;
+    max-width: 640px;
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-inline: 3rem;
+  }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+    /* Limit max width for large screens */
+    padding-inline: 4rem;
+    /* More breathing room on large screens */
   }
 }

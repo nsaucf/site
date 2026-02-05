@@ -18,27 +18,26 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Invalid file path" }, { status: 400 });
         }
 
-        // Extract filename and secure path
         const filename = path.basename(url);
-        const filePath = path.join(process.cwd(), "public/uploads", filename);
+        const uploadDirs = [
+            path.join(process.cwd(), "public/uploads"),
+            path.join(process.cwd(), ".next/standalone/public/uploads"),
+        ];
 
-        // Verify it still points to uploads dir (anti-traversal check, though basename usage mostly handles this)
-        if (!filePath.startsWith(path.join(process.cwd(), "public/uploads"))) {
-            return NextResponse.json({ error: "Invalid file path" }, { status: 400 });
+        let deleted = false;
+
+        for (const dir of uploadDirs) {
+            const filePath = path.join(dir, filename);
+            if (!filePath.startsWith(dir)) continue;
+            try {
+                await fs.unlink(filePath);
+                deleted = true;
+            } catch {
+                // ignore missing
+            }
         }
 
-        // Check if exists
-        try {
-            await fs.access(filePath);
-        } catch {
-            // File doesn't exist, technically success for "ensure deleted"
-            return NextResponse.json({ success: true, message: "File not found, assumed deleted" });
-        }
-
-        // Delete
-        await fs.unlink(filePath);
-
-        return NextResponse.json({ success: true });
+        return NextResponse.json({ success: true, deleted });
     } catch (error) {
         console.error("Delete error:", error);
         return NextResponse.json({ error: "Delete failed" }, { status: 500 });

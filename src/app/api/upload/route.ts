@@ -25,19 +25,24 @@ export async function POST(req: Request) {
         // Add timestamp to avoid collisions
         const fileName = `${Date.now()}-${safeName}`;
 
-        const uploadDir = path.join(process.cwd(), "public/uploads");
+        // Primary upload target plus standalone copy (for Next standalone builds)
+        const uploadDirs = [
+            path.join(process.cwd(), "public/uploads"),
+            path.join(process.cwd(), ".next/standalone/public/uploads"),
+        ];
 
-        // Ensure dir exists (redundant if we did mkdir, but safe)
-        try {
-            await fs.access(uploadDir);
-        } catch {
-            await fs.mkdir(uploadDir, { recursive: true });
+        // Ensure dirs exist and write to each (best-effort for secondary)
+        for (const dir of uploadDirs) {
+            try {
+                await fs.mkdir(dir, { recursive: true });
+                const filePath = path.join(dir, fileName);
+                await fs.writeFile(filePath, buffer);
+            } catch (err) {
+                // Ignore secondary write errors
+                console.error("Upload write failed for", dir, err);
+            }
         }
 
-        const filePath = path.join(uploadDir, fileName);
-        await fs.writeFile(filePath, buffer);
-
-        // Return the public URL
         const publicUrl = `/uploads/${fileName}`;
         return NextResponse.json({ url: publicUrl });
     } catch (error) {
